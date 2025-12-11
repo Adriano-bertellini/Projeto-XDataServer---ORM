@@ -4,7 +4,9 @@ uses
   Vcl.Forms,
   Server in 'Server.pas',
   ConnectionModule in 'ConnectionModule.pas' {FireDacFirebird3Connection: TDataModule},
-  MainForm in 'MainForm.pas' {fmServer};
+  MainForm in 'MainForm.pas' {fmServer},
+  MyService in 'MyService.pas',
+  uEntityUsuario in 'uEntityUsuario.pas';
 
 {$R *.res}
 

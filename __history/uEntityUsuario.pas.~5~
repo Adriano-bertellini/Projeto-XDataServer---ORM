@@ -1,0 +1,21 @@
+unit uEntityUsuario;
+
+interface
+
+type
+  TUsuario = class
+  private
+    FID: Integer;
+    Fnome: string;
+    Fsenha: string;
+
+  public
+    property ID: Integer read FID write FID;
+    property nome: string read Fnome write Fnome;
+    property senha: string read Fsenha write Fsenha;
+  
+  end;
+
+implementation
+
+end.

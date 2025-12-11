@@ -2,8 +2,8 @@ object fmServer: TfmServer
   Left = 0
   Top = 0
   Caption = 'Hello Server'
-  ClientHeight = 124
-  ClientWidth = 398
+  ClientHeight = 362
+  ClientWidth = 653
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
