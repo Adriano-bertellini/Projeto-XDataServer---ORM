@@ -1,0 +1,65 @@
+unit uLogin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+  XData.Client, Vcl.StdCtrls, uEntityUsuario, Aurelius.Criteria.Linq,
+  Aurelius.Mapping.Attributes,
+  Aurelius.Engine.ObjectManager,
+  Aurelius.Criteria.Base,
+  Aurelius.Criteria.Projections, System.Generics.Collections,
+  XData.QueryBuilder;
+
+type
+  TFormLogin = class(TForm)
+    Panel1: TPanel;
+    imgLogo: TImage;
+    Panel2: TPanel;
+    pnlLogin: TPanel;
+    Panel3: TPanel;
+    edtSenha: TEdit;
+    edtUsuario: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    btnLogin: TButton;
+    procedure btnLoginClick(Sender: TObject);
+  private
+    { Private declarations }
+    Client: TXDataClient;
+
+  public
+    { Public declarations }
+  end;
+
+var
+  FormLogin: TFormLogin;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormLogin.btnLoginClick(Sender: TObject);
+var
+  Usuarios: TList<TUsuario>;
+begin
+  try
+    Client := TXDataClient.Create;
+    Client.Uri := 'http://server:2001/tms/xdata';
+
+    Usuarios := nil;
+    Usuarios := Client.List<TUsuario>
+      (Format('$filter=(NOME eq ''%s'') and (SENHA eq ''%s'')',
+      [edtUsuario.Text, edtSenha.Text]));
+
+    if ((Usuarios.Count = 0) or (Usuarios = nil)) then
+      raise Exception.Create('Senha ou usuário incorreto, tente novamente!');
+  finally
+    if Assigned(Usuarios) then
+      Usuarios.Free;
+  end;
+end;
+
+end.
